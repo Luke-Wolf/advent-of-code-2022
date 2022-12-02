@@ -1,4 +1,5 @@
 use std::io;
+
 fn main() {
     let input = io::read_to_string(std::io::stdin()).unwrap();
     let top_calories = top_calories(&input);
