@@ -55,30 +55,35 @@ pub fn top_3_calories(numbers: &str) -> Option<i32> {
 
 #[cfg(test)]
 mod test {
-    use crate::add_numbers;
+    use crate::*;
 
     #[test]
     fn add_numbers_empty() {
-        assert_eq!(add_numbers(""), None)
+        assert_eq!(top_calories(""), None)
     }
 
     #[test]
     fn add_numbers_single() {
-        assert_eq!(add_numbers("100"), Some(100))
+        assert_eq!(top_calories("100"), Some(100))
     }
 
     #[test]
     fn add_numbers_multiple() {
-        assert_eq!(add_numbers("100\n200"), Some(300))
+        assert_eq!(top_calories("100\n200"), Some(300))
     }
 
     #[test]
     fn add_numbers_single_multiple_groups() {
-        assert_eq!(add_numbers("100\n\n200"), Some(200))
+        assert_eq!(top_calories("100\n\n200"), Some(200))
     }
 
     #[test]
     fn add_numbers_multiple_multiple_groups() {
-        assert_eq!(add_numbers("100\n200\n\n300\n400"), Some(700))
+        assert_eq!(top_calories("100\n200\n\n300\n400"), Some(700))
+    }
+
+    #[test]
+    fn add_top_3_calories() {
+        assert_eq!(top_3_calories("100\n\n200\n\n300"), Some(600))
     }
 }
