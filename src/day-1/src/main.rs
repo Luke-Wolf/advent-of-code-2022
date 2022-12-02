@@ -1,11 +1,13 @@
 use std::io;
 fn main() {
     let input = io::read_to_string(std::io::stdin()).unwrap();
-    let result = add_numbers(&input);
-    println!("{result:?}")
+    let top_calories = top_calories(&input);
+    let top_3_calories = top_3_calories(&input);
+    println!("top calories: {top_calories:?}");
+    println!("top 3 calories: {top_3_calories:?}");
 }
 
-pub fn add_numbers(numbers: &str) -> Option<i32> {
+pub fn get_calories(numbers: &str) -> Option<Vec<i32>> {
     if numbers.len() == 0 {
         None
     } else {
@@ -31,7 +33,23 @@ pub fn add_numbers(numbers: &str) -> Option<i32> {
             });
         results.sort();
         results.reverse();
-        Some(results[0])
+        Some(results)
+    }
+}
+
+pub fn top_calories(numbers: &str) -> Option<i32> {
+    if let Some(result) = get_calories(numbers) {
+        Some(result[0])
+    } else {
+        None
+    }
+}
+
+pub fn top_3_calories(numbers: &str) -> Option<i32> {
+    if let Some(result) = get_calories(numbers) {
+        Some(result[0..3].iter().fold(0, |accum, item| accum + item))
+    } else {
+        None
     }
 }
 
