@@ -117,7 +117,7 @@ fn main() {
 }
 
 #[cfg(test)]
-mod Tests {
+mod tests {
     use crate::*;
 
     #[test]
@@ -190,6 +190,7 @@ mod Tests {
         assert_eq!(crates.top_crates(), "AB");
     }
 
+    #[test]
     fn get_top_crates_with_empty() {
         let crates = create_multiple_stacks_of_crates_with_missing();
         assert_eq!(crates.top_crates(), "AB");
@@ -199,7 +200,7 @@ mod Tests {
     fn run_command() {
         let command = create_command();
         let mut crates = create_multiple_stacks_of_crates_with_depth();
-        for i in 0..command.count {
+        for _ in 0..command.count {
             crates.move_crate(command.from, command.to);
         }
         assert_eq!(crates.crates.len(), 2);
@@ -216,7 +217,7 @@ mod Tests {
         assert_eq!(crates.crates[0].len(), 2);
         assert_eq!(crates.crates[1].len(), 1);
         let command = Command::from_str(command);
-        for i in 0..command.count {
+        for _ in 0..command.count {
             crates.move_crate(command.from, command.to);
         }
 
